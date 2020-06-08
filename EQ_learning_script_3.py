@@ -119,9 +119,12 @@ model.compile(loss='binary_crossentropy', optimizer=opt,
                        tf.keras.metrics.Recall(),tf.keras.metrics.Precision()])
 print('Model Compiled')
 
+# binary_accuracy=tf.keras.metrics.BinaryAccuracy(
+#     name="binary_accuracy", dtype=None, threshold=0.5
+# )
+# model=keras.models.load_model('model_save12_4_checkpoint',custom_objects={'BinaryAccuracy':binary_accuracy})
+model.load_weights('model_save12_4_checkpoint')
 model.summary()
-model.load_model('model_save12_4_checkpoint')
-# model.load_weights('model_save12_4_checkpoint')
 
 checkpoint = keras.callbacks.ModelCheckpoint('model_save12_4_checkpoint', monitor='loss', verbose=1, save_best_only=True, mode='min')
 csv_logger = keras.callbacks.CSVLogger("model_history_log.csv", append=True)
